@@ -105,3 +105,5 @@ if __name__ == "__main__":
         print('Option not found...')
 
     ####################################################### 20. PAGE
+
+    print("Change")
