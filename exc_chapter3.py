@@ -1,6 +1,7 @@
 from collections import Counter
 import matplotlib.pyplot as plt
 import csv
+import math
 if __name__ == '__main__':
     '''
     def mean(data_set):
@@ -291,3 +292,79 @@ if __name__ == '__main__':
     plt.show()
     '''
 
+    # EXC 4
+    '''
+    def read_txt(filename):
+        with open(filename) as f:
+            new_list = []
+            for line in f:
+                new_list.append(float(line))
+        return new_list
+
+    def give_percentile(dataset, percentile):
+        dataset = sorted(dataset)
+        n = len(dataset)
+        i = n * (percentile/100) + 0.5
+        if i.is_integer():
+            return dataset[i-1]
+        elif percentile == 0:
+            return dataset[0]
+        elif percentile == 100:
+            return dataset[-1]
+        elif percentile < 0 or percentile > 100:
+            return None
+        else:
+            k = int(math.floor(i))
+            f = i - k
+            return (1-f)*dataset[k-1] + f*dataset[k]
+
+    dataset = read_txt('my_Data.txt')
+    p = float(input('Enter specific percentile: '))
+    percentile = give_percentile(dataset, p)
+    if not percentile:
+        print('You entered wrong percentile.')
+    else:
+        print('Achieved percentile: {0}'.format(percentile))
+    '''
+
+    # EXC 5
+
+    '''
+    def create_classs(numbers, n):
+        low = min(numbers)
+        high = max(numbers)
+        width = (high - low)/n
+        classes = []
+        a = low
+        b = low + width
+
+        while a < (high-width):
+            classes.append((a, b))
+            a = b
+            b = a + width
+        classes.append((a, high+1))
+        return classes
+
+    def read_txt(filename):
+        with open(filename) as f:
+            new_list = []
+            for line in f:
+                new_list.append(float(line))
+        return new_list
+
+    def classify(numbers, classes):
+        count = [0]*len(classes)
+        for n in numbers:
+            for index, c in enumerate(classes):
+                if n >= c[0] and n < c[1]:
+                    count[index] += 1
+                    break
+        return count
+
+    num_classes = int(input('Enter the number of classes: '))
+    numbers = read_txt('my_Data.txt')
+    classes = create_classs(numbers, num_classes)
+    count = classify(numbers, classes)
+    for c, cnt in zip(classes, count):
+        print('{0:.2f} - {1:.2f} \t {2}'.format(c[0], c[1], cnt))
+    '''
